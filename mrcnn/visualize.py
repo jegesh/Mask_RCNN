@@ -72,6 +72,9 @@ def random_colors(N, bright=True):
 def apply_mask(image, mask, color, alpha=0.5):
     """Apply the given mask to the image.
     """
+    if len(image.shape) != 3 or image.shape[2] != 3:
+        image = np.squeeze(image, axis = -1)
+        image = np.stack((image,) * 3, -1)
     for c in range(3):
         image[:, :, c] = np.where(mask == 1,
                                   image[:, :, c] *
