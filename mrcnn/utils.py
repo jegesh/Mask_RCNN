@@ -423,7 +423,8 @@ def resize_image(image, min_dim=None, max_dim=None, min_scale=None, mode="square
     h, w = image.shape[:2]
     window = (0, 0, h, w)
     scale = 1
-    padding = [(0, 0), (0, 0), (0, 0)]
+    padding = [(top_pad, bottom_pad), (left_pad, right_pad)]
+    image = np.pad(image, padding, mode='constant', constant_values=0)
     crop = None
 
     if mode == "none":
